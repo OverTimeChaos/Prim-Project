@@ -2,11 +2,23 @@ import json
 from random import randint
 global question
 question = json.load(open("topic.json", "r"))
+global completed
+completed = []
+
+def getKeyArea():
+    keyArea = list(question)[randint(0, 9)]
+    if keyArea in completed:
+        return getKeyArea()
+    else:
+        completed.append(keyArea)
+        return keyArea
+
+
 def startgame():
     Start_game = input ("Would you like to play the quiz? Enter T for tutorial ")
     if Start_game.lower() == "y":
         print ("Starting game")
-        keyArea = list(question)[randint(0, 9)]
+        keyArea = getKeyArea()
         print (question[keyArea][0])
     elif Start_game.lower() =="t":
         print(f'''Welcome to Gamivia
