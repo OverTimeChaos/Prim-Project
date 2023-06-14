@@ -1,10 +1,13 @@
 import json
+from random import randint
 global question
 question = json.load(open("topic.json", "r"))
 def startgame():
     Start_game = input ("Would you like to play the quiz? Enter T for tutorial ")
     if Start_game.lower() == "y":
-        print ("starting game")
+        print ("Starting game")
+        keyArea = list(question)[randint(0, 9)]
+        print (question[keyArea][0])
     elif Start_game.lower() =="t":
         print(f'''Welcome to Gamivia
 A random topic will be chosen
@@ -21,7 +24,6 @@ You continue guessing until all topics run out then the final score will display
         startgame()
     else:
         print ("Then why did you open this program?")
-       
         startgame()
 
 startgame()
