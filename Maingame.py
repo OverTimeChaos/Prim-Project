@@ -47,8 +47,11 @@ def getclueAnswer(first=False, Clue_choose=""):
 
 def guess():
     global player_points
-    print("well you can't guess cause james is lazy and didn't code in a guess")
-    player_points = -20 
+    Answer = input ("Type in answer: ")
+    if Answer.lower() == topic_area.lower():
+        print()
+        input()
+
      
     
 #Main quiz
