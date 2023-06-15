@@ -81,3 +81,4 @@ You continue guessing until all topics run out then the final score will display
         startgame()
 
 startgame()
+print("o")
