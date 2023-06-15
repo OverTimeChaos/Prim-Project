@@ -19,6 +19,10 @@ def getKeyArea():
 #Allows the program to recognize if the clue has been chosen already
 def getclueAnswer(first=False, Clue_choose=""):
     global player_points
+    global topic_completed
+    global game_score
+    global topic_completed
+    global player_score
     if first:
         clue = question[topic_area][randint(0,len(topic_area)-1)]
         clue_chosen.append(clue)
@@ -37,62 +41,98 @@ def getclueAnswer(first=False, Clue_choose=""):
                 print("Clue already chosen")
                 clue = getclueAnswer(first, input("Insert Another Number or Y to take a guess "))
             else:
-                print(clue)
-                clue_chosen.append(clue)
                 player_points = player_points-1 
+                if player_points <= 0:
+                    print (f"You have failed to guess, {topic_area}")
+                    topic_completed = True
+                    game_score = game_score + 1
+                    game_quiz()
+                else:
+                    print(clue)
+                    clue_chosen.append(clue)
         except ValueError:
             print("Invalid value!")
             clue = getclueAnswer(first, input("Insert Valid Value "))
         return clue
-
+# allows the program to assess answers
 def guess():
     global player_points
+    global game_score
+    global topic_completed
+    global player_score
+    global topic_area
     Answer = input ("Type in answer: ")
     if Answer.lower() == topic_area.lower():
-        print()
-        input()
-
-     
-    
-#Main quiz
+        print("Correct!")
+        input("Hit enter to continue")
+        topic_completed = True
+        game_score = game_score + 1
+        player_score = player_score + 1
+        clue_chosen.clear()
+        topic_area = getKeyArea()
+        player_points = 20
+        game_quiz()
+        
+    else:
+        print ("Incorrect, two point deducted")
+        player_points = player_points - 2
+        if player_points <= 0:
+                print (f"You have failed to guess, {topic_area}")
+                topic_completed = True
+                game_score = game_score + 1
+                clue_chosen.clear()
+                topic_area = getKeyArea()
+                player_points = 20
+                game_quiz()
+                
+        else:
+            print (player_points)
+        clue = getclueAnswer(Clue_choose=input("Insert Another Number or Y to take a guess "))
+            
+        
+#Main quiz area
 def game_quiz():
     global player_points
     global game_score
     global player_score
+    global topic_completed
     if game_score < 11:
         firstclued = False
-        print (f"You currently have {player_score} points")
+        print (f"You currently have answered {player_score} areas correctly")
         global topic_area
-        topic_area = getKeyArea()
-        player_points = 20
         topic_completed = False
         while not topic_completed:
-            if player_points <= 0:
-                print (f"You have failed to guess, {topic_area}")
-                topic_completed = True
-                game_score = game_score + 1
-            
+            if firstclued == False:
+                first_clue = getclueAnswer(first=True)
+                firstclued = True
             else:
-                if firstclued == False:
-                    first_clue = getclueAnswer(first=True)
-                    firstclued = True
-                else:
-                    for clue in clue_chosen:
-                        print(f" - {clue}")
-                    print (f'You have {player_points} left')
-                    Clue_choose = input("Would you like to guess with 'y' or get another clue? ")
-                    getclueAnswer(Clue_choose=Clue_choose)
-#Gets called when the program starts
+                for clue in clue_chosen:
+                    print(f" - {clue}")
+                print (f'You have {player_points} points left')
+                Clue_choose = input("Would you like to guess with 'y' or get another clue? ")
+                getclueAnswer(Clue_choose=Clue_choose)
+    else:
+        print (f'''final score 
+{player_score}''')
+        play_Again = input("Would you like play again? ")
+        if play_Again.lower() == "y":
+            game_quiz()
+        else:
+            quit()
+#Gets called when the program starts. Sets early parameters 
 def startgame():
     global player_points
     global game_score
     global player_score
-    Start_game = input ("Would you like to play the quiz? Enter T for tutorial ")
+    global topic_area
+    Start_game = input ("Would you like to play the quiz? Press Y to Start, Enter T for tutorial ")
     if Start_game.lower() == "y":
         print ("Starting game")
         player_points = 0
-        game_score = 10
+        game_score = 0
         player_score = 0
+        topic_area = getKeyArea()
+        player_points = 20
         game_quiz()
     elif Start_game.lower() =="t":
         print(f'''Welcome to Gamivia
@@ -136,5 +176,3 @@ print (f'''
                                                                                                                                                       
 ''')
 startgame()
-print (f'''final score 
-{player_score}''')
