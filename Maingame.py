@@ -12,7 +12,7 @@ clue_chosen = []
 def getKeyArea():
     global player_points,game_score,player_score,topic_area
     if len(question) == len(completed):
-        print (f'''final score 
+        print (f'''final score:
 {player_score}''')
         play_Again = input("Would you like play again? ")
         if play_Again.lower() == "y":
@@ -65,7 +65,7 @@ def getclueAnswer(first=False, Clue_choose=""):
             print("Invalid value!")
             clue = getclueAnswer(first, input("Insert Valid Value "))
         return clue
-    
+# check if player has run out of
 def checkGameOver():
     global player_points, topic_completed, game_score, clue_chosen, topic_area
     if  player_points <= 0:
@@ -102,9 +102,7 @@ def guess():
         print (player_points)
         for clue in clue_chosen:
                 print(f" - {clue}")
-        clue = getclueAnswer(Clue_choose=input("Insert Another Number or Y to take a guess "))
-            
-        
+        clue = getclueAnswer(Clue_choose=input("Insert Another Number or Y to take a guess "))      
 #Main quiz area
 def game_quiz():
     global player_points
