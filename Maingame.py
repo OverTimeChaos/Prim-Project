@@ -40,7 +40,7 @@ def getclueAnswer(first=False, Clue_choose=""):
     global topic_completed
     global player_score
     if first:
-        clue = question[topic_area][randint(0,9)-1]
+        clue = question[topic_area][randint(0,19)]
         clue_chosen.append(clue)
         return clue
     elif str(Clue_choose).lower() == 'y':
