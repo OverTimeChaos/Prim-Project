@@ -10,11 +10,27 @@ clue_chosen = []
 
 #Allows the program to uniquely choose a Area
 def getKeyArea():
-    keyArea = list(question)[randint(0, len(question)-1)]
-    if keyArea in completed:
-        return getKeyArea()
+    global player_points,game_score,player_score,topic_area
+    if len(question) == len(completed):
+        print (f'''final score 
+{player_score}''')
+        play_Again = input("Would you like play again? ")
+        if play_Again.lower() == "y":
+            completed.clear()
+            player_points = 0
+            game_score = 0
+            player_score = 0
+            topic_area = getKeyArea()
+            player_points = 20
+            game_quiz()
+        else:
+            quit()
     else:
-        completed.append(keyArea)
+        keyArea = list(question)[randint(0, len(question)-1)]
+        if keyArea in completed:
+            return getKeyArea()
+        else:
+            completed.append(keyArea)
         return keyArea
 #Allows the program to recognize if the clue has been chosen already
 def getclueAnswer(first=False, Clue_choose=""):
@@ -97,7 +113,7 @@ def game_quiz():
     global topic_completed
     if game_score < 11:
         firstclued = False
-        print (f"You currently have answered {player_score} areas correctly")
+        print (f"You currently have answered {player_score} area(s) correctly")
         global topic_area
         topic_completed = False
         while not topic_completed:
@@ -107,17 +123,9 @@ def game_quiz():
             else:
                 for clue in clue_chosen:
                     print(f" - {clue}")
-                print (f'You have {player_points} points left')
+                print (f'You have {player_points} point(s) left')
                 Clue_choose = input("Would you like to guess with 'y' or get another clue? ")
                 getclueAnswer(Clue_choose=Clue_choose)
-    else:
-        print (f'''final score 
-{player_score}''')
-        play_Again = input("Would you like play again? ")
-        if play_Again.lower() == "y":
-            game_quiz()
-        else:
-            quit()
 #Gets called when the program starts. Sets early parameters 
 def startgame():
     global player_points
