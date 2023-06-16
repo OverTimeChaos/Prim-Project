@@ -24,7 +24,7 @@ def getclueAnswer(first=False, Clue_choose=""):
     global topic_completed
     global player_score
     if first:
-        clue = question[topic_area][randint(0,len(topic_area)-1)]
+        clue = question[topic_area][randint(0,9)-1]
         clue_chosen.append(clue)
         return clue
     elif str(Clue_choose).lower() == 'y':
@@ -42,18 +42,24 @@ def getclueAnswer(first=False, Clue_choose=""):
                 clue = getclueAnswer(first, input("Insert Another Number or Y to take a guess "))
             else:
                 player_points = player_points-1 
-                if player_points <= 0:
-                    print (f"You have failed to guess, {topic_area}")
-                    topic_completed = True
-                    game_score = game_score + 1
-                    game_quiz()
-                else:
-                    print(clue)
-                    clue_chosen.append(clue)
+                checkGameOver()
+                print(clue)
+                clue_chosen.append(clue)
         except ValueError:
             print("Invalid value!")
             clue = getclueAnswer(first, input("Insert Valid Value "))
         return clue
+    
+def checkGameOver():
+    global player_points, topic_completed, game_score, clue_chosen, topic_area
+    if  player_points <= 0:
+                print (f"You have failed to guess, {topic_area}")
+                topic_completed = True
+                game_score = game_score + 1
+                clue_chosen.clear()
+                topic_area = getKeyArea()
+                player_points = 20
+                game_quiz()
 # allows the program to assess answers
 def guess():
     global player_points
@@ -76,19 +82,10 @@ def guess():
     else:
         print ("Incorrect, two point deducted")
         player_points = player_points - 2
-        if player_points <= 0:
-                print (f"You have failed to guess, {topic_area}")
-                topic_completed = True
-                game_score = game_score + 1
-                clue_chosen.clear()
-                topic_area = getKeyArea()
-                player_points = 20
-                game_quiz()
-                
-        else:
-            print (player_points)
-            for clue in clue_chosen:
-                    print(f" - {clue}")
+        checkGameOver()
+        print (player_points)
+        for clue in clue_chosen:
+                print(f" - {clue}")
         clue = getclueAnswer(Clue_choose=input("Insert Another Number or Y to take a guess "))
             
         
