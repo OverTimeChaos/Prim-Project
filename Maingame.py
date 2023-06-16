@@ -87,6 +87,8 @@ def guess():
                 
         else:
             print (player_points)
+            for clue in clue_chosen:
+                    print(f" - {clue}")
         clue = getclueAnswer(Clue_choose=input("Insert Another Number or Y to take a guess "))
             
         
