@@ -10,9 +10,19 @@ clue_chosen = []
 
 #Allows the program to uniquely choose a Area
 def getKeyArea():
+    global player_score
     keyArea = list(question)[randint(0, len(question)-1)]
     if keyArea in completed:
         return getKeyArea()
+    elif keyArea ==  ValueError:
+        print (f'''final score 
+{player_score}''')
+        play_Again = input("Would you like play again? ")
+        if play_Again.lower() == "y":
+            completed.clear()
+            game_quiz()
+        else:
+            quit()
     else:
         completed.append(keyArea)
         return keyArea
@@ -70,7 +80,7 @@ def guess():
     Answer = input ("Type in answer: ")
     if Answer.lower() == topic_area.lower():
         print("Correct!")
-        input("Hit enter to continue")
+        input("Hit enter to continue ")
         topic_completed = True
         game_score = game_score + 1
         player_score = player_score + 1
@@ -110,14 +120,7 @@ def game_quiz():
                 print (f'You have {player_points} points left')
                 Clue_choose = input("Would you like to guess with 'y' or get another clue? ")
                 getclueAnswer(Clue_choose=Clue_choose)
-    else:
-        print (f'''final score 
-{player_score}''')
-        play_Again = input("Would you like play again? ")
-        if play_Again.lower() == "y":
-            game_quiz()
-        else:
-            quit()
+    
 #Gets called when the program starts. Sets early parameters 
 def startgame():
     global player_points
