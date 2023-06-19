@@ -49,7 +49,7 @@ def getclueAnswer(first=False, Clue_choose=""):
         try:
             Clue_choose = int(Clue_choose)
             try:
-                clue = question[topic_area][Clue_choose]
+                clue = question[topic_area][Clue_choose-1]
             except IndexError:
                 print("Value out of range")
                 clue = getclueAnswer(first, input("Insert Another Number or Y to take a guess "))
