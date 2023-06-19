@@ -101,6 +101,7 @@ def guess():
         checkGameOver()
         for clue in clue_chosen:
                 print(f" - {clue}")
+        print (f'You have {player_points} point(s) left')
         clue = getclueAnswer(Clue_choose=input("Insert Another Number or Y to take a guess "))      
 #Main quiz area
 def game_quiz():
