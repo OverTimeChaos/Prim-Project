@@ -86,7 +86,7 @@ def guess():
     Answer = input ("Type in answer: ")
     if Answer.lower() == topic_area.lower():
         print("Correct!")
-        input("Hit enter to continue")
+        input("Hit enter to continue ")
         topic_completed = True
         game_score = game_score + 1
         player_score = player_score + 1
