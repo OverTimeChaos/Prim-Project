@@ -69,13 +69,13 @@ def getclueAnswer(first=False, Clue_choose=""):
 def checkGameOver():
     global player_points, topic_completed, game_score, clue_chosen, topic_area
     if  player_points <= 0:
-                print (f"You have failed to guess, {topic_area}")
-                topic_completed = True
-                game_score = game_score + 1
-                clue_chosen.clear()
-                topic_area = getKeyArea()
-                player_points = 20
-                game_quiz()
+        print (f"You have failed to guess, {topic_area}")
+        topic_completed = True
+        game_score = game_score + 1
+        clue_chosen.clear()
+        topic_area = getKeyArea()
+        player_points = 20
+        game_quiz()
 # allows the program to assess answers
 def guess():
     global player_points
@@ -101,7 +101,6 @@ def guess():
         checkGameOver()
         for clue in clue_chosen:
                 print(f" - {clue}")
-        print (f'You have {player_points} point(s) left')
         clue = getclueAnswer(Clue_choose=input("Insert Another Number or Y to take a guess "))      
 #Main quiz area
 def game_quiz():
