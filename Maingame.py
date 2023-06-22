@@ -1,4 +1,5 @@
 import json
+import tastetherainbow
 from random import randint
 global question
 #load json
@@ -12,9 +13,9 @@ clue_chosen = []
 def getKeyArea():
     global player_points,game_score,player_score,topic_area
     if len(question) == len(completed):
-        print (f'''final score:
-{player_score}''')
-        play_Again = input("Would you like play again? ")
+        print (f'''{tastetherainbow.fg.green}final score:
+{player_score}{tastetherainbow.reset}''')
+        play_Again = input(tastetherainbow.fg.cyan+"Would you like play again? "+tastetherainbow.reset)
         if play_Again.lower() == "y":
             completed.clear()
             player_points = 0
@@ -51,25 +52,24 @@ def getclueAnswer(first=False, Clue_choose=""):
             try:
                 clue = question[topic_area][Clue_choose-1]
             except IndexError:
-                print("Value out of range")
-                clue = getclueAnswer(first, input("Insert Another Number or Y to take a guess "))
+                print(tastetherainbow.fg.red+"Value out of range"+tastetherainbow.reset)
+                clue = getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Value in range "+tastetherainbow.reset))
             if clue in clue_chosen:
-                print("Clue already chosen")
-                clue = getclueAnswer(first, input("Insert Another Number or Y to take a guess "))
+                print(tastetherainbow.fg.red+"Clue already chosen"+tastetherainbow.reset)
+                clue = getclueAnswer(first, input(tastetherainbow.fg.red+"Insert Another Number or Y to take a guess "+tastetherainbow.reset))
             else:
                 player_points = player_points-1 
                 checkGameOver()
-                print(clue)
                 clue_chosen.append(clue)
         except ValueError:
-            print("Invalid value!")
-            clue = getclueAnswer(first, input("Insert Valid Value "))
+            print(tastetherainbow.fg.red+"Invalid value!"+tastetherainbow.reset)
+            clue = getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Valid Value "+tastetherainbow.reset))
         return clue
 # check if player has run out of
 def checkGameOver():
     global player_points, topic_completed, game_score, clue_chosen, topic_area
     if  player_points <= 0:
-        print (f"You have failed to guess, {topic_area}")
+        print (f"{tastetherainbow.fg.magenta}You have failed to guess, {topic_area}{tastetherainbow.reset}")
         topic_completed = True
         game_score = game_score + 1
         clue_chosen.clear()
@@ -83,10 +83,10 @@ def guess():
     global topic_completed
     global player_score
     global topic_area
-    Answer = input ("Type in answer: ")
+    Answer = input (tastetherainbow.fg.yellow +"Type in answer: "+tastetherainbow.reset)
     if Answer.lower() == topic_area.lower():
-        print("Correct!")
-        input("Hit enter to continue ")
+        print(tastetherainbow.fg.green+"Correct!"+tastetherainbow.reset)
+        input(tastetherainbow.fg.green+"Hit enter to continue "+tastetherainbow.reset)
         topic_completed = True
         game_score = game_score + 1
         player_score = player_score + 1
@@ -96,12 +96,13 @@ def guess():
         game_quiz()
         
     else:
-        print ("Incorrect, two point deducted")
+        print (tastetherainbow.fg.red+"Incorrect, two point deducted"+tastetherainbow.reset)
         player_points = player_points - 2
         checkGameOver()
+        print (f'{tastetherainbow.fg.cyan}You have {player_points} point(s) left{tastetherainbow.reset}')
         for clue in clue_chosen:
-                print(f" - {clue}")
-        clue = getclueAnswer(Clue_choose=input("Insert Another Number or Y to take a guess "))      
+                print(f"{tastetherainbow.fg.magenta} - {clue}{tastetherainbow.reset}")
+        clue = getclueAnswer(Clue_choose=input(tastetherainbow.fg.red+"Insert Another Number or Y to take a guess "+tastetherainbow.reset))      
 #Main quiz area
 def game_quiz():
     global player_points
@@ -110,7 +111,7 @@ def game_quiz():
     global topic_completed
     if game_score < 11:
         firstclued = False
-        print (f"You currently have answered {player_score} area(s) correctly")
+        print (f"{tastetherainbow.fg.blue}You currently have answered {player_score} area(s) correctly{tastetherainbow.reset}")
         global topic_area
         topic_completed = False
         while not topic_completed:
@@ -119,9 +120,9 @@ def game_quiz():
                 firstclued = True
             else:
                 for clue in clue_chosen:
-                    print(f" - {clue}")
-                print (f'You have {player_points} point(s) left')
-                Clue_choose = input("Would you like to guess with 'y' or get another clue? ")
+                    print(f"{tastetherainbow.fg.magenta} - {clue}{tastetherainbow.reset}")
+                print (f'{tastetherainbow.fg.cyan}You have {player_points} point(s) left{tastetherainbow.reset}')
+                Clue_choose = input(tastetherainbow.fg.yellow+"Would you like to guess with 'y' or get another clue? "+tastetherainbow.reset)
                 getclueAnswer(Clue_choose=Clue_choose)
 #Gets called when the program starts. Sets early parameters 
 def startgame():
@@ -129,9 +130,9 @@ def startgame():
     global game_score
     global player_score
     global topic_area
-    Start_game = input ("Would you like to play the quiz? Press Y to Start, Enter T for tutorial ")
+    Start_game = input (tastetherainbow.fg.yellow+"Would you like to play the quiz? Press Y to Start, Enter T for tutorial "+tastetherainbow.reset)
     if Start_game.lower() == "y":
-        print ("Starting game")
+        print (tastetherainbow.fg.blue+"Starting game"+tastetherainbow.reset)
         player_points = 0
         game_score = 0
         player_score = 0
@@ -153,30 +154,31 @@ You continue guessing until all topics run out then the final score will display
 ''')   
         startgame()
     else:
-        print ("Then why did you open this program?")
+        print (tastetherainbow.fg.red+"Then why did you open this program?"+tastetherainbow.reset)
         startgame()
 print (f'''
-          _____                    _____                    _____                    _____                    _____                    _____          
-         /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \         
-        /::\    \                /::\    \                /::\____\                /::\____\                /::\    \                /::\    \        
-       /::::\    \              /::::\    \              /::::|   |               /:::/    /                \:::\    \              /::::\    \       
-      /::::::\    \            /::::::\    \            /:::::|   |              /:::/    /                  \:::\    \            /::::::\    \      
-     /:::/\:::\    \          /:::/\:::\    \          /::::::|   |             /:::/    /                    \:::\    \          /:::/\:::\    \     
-    /:::/  \:::\    \        /:::/__\:::\    \        /:::/|::|   |            /:::/____/                      \:::\    \        /:::/__\:::\    \    
-   /:::/    \:::\    \      /::::\   \:::\    \      /:::/ |::|   |            |::|    |                       /::::\    \      /::::\   \:::\    \   
-  /:::/    / \:::\    \    /::::::\   \:::\    \    /:::/  |::|___|______      |::|    |     _____    ____    /::::::\    \    /::::::\   \:::\    \  
- /:::/    /   \:::\ ___\  /:::/\:::\   \:::\    \  /:::/   |::::::::\    \     |::|    |    /\    \  /\   \  /:::/\:::\    \  /:::/\:::\   \:::\    \ 
-/:::/____/  ___\:::|    |/:::/  \:::\   \:::\____\/:::/    |:::::::::\____\    |::|    |   /::\____\/::\   \/:::/  \:::\____\/:::/  \:::\   \:::\____\\
-\:::\    \ /\  /:::|____|\::/    \:::\  /:::/    /\::/    / ~~~~~/:::/    /    |::|    |  /:::/    /\:::\  /:::/    \::/    /\::/    \:::\  /:::/    /
- \:::\    /::\ \::/    /  \/____/ \:::\/:::/    /  \/____/      /:::/    /     |::|    | /:::/    /  \:::\/:::/    / \/____/  \/____/ \:::\/:::/    / 
-  \:::\   \:::\ \/____/            \::::::/    /               /:::/    /      |::|____|/:::/    /    \::::::/    /                    \::::::/    /  
-   \:::\   \:::\____\               \::::/    /               /:::/    /       |:::::::::::/    /      \::::/____/                      \::::/    /   
-    \:::\  /:::/    /               /:::/    /               /:::/    /        \::::::::::/____/        \:::\    \                      /:::/    /    
-     \:::\/:::/    /               /:::/    /               /:::/    /          ~~~~~~~~~~               \:::\    \                    /:::/    /     
-      \::::::/    /               /:::/    /               /:::/    /                                     \:::\    \                  /:::/    /      
-       \::::/    /               /:::/    /               /:::/    /                                       \:::\____\                /:::/    /       
-        \::/____/                \::/    /                \::/    /                                         \::/    /                \::/    /        
-                                  \/____/                  \/____/                                           \/____/                  \/____/         
+          {tastetherainbow.fg.red}_____{tastetherainbow.reset}                    {tastetherainbow.fg.green}_____{tastetherainbow.reset}                     {tastetherainbow.fg.yellow}_____{tastetherainbow.reset}                    {tastetherainbow.fg.blue}_____{tastetherainbow.reset}                    {tastetherainbow.fg.magenta}_____{tastetherainbow.reset}                    {tastetherainbow.fg.cyan}_____{tastetherainbow.reset}          
+         {tastetherainbow.fg.red}/\    \{tastetherainbow.reset}                  {tastetherainbow.fg.green}/\    \{tastetherainbow.reset}                   {tastetherainbow.fg.yellow}/\    \{tastetherainbow.reset}                  {tastetherainbow.fg.blue}/\    \{tastetherainbow.reset}                  {tastetherainbow.fg.magenta}/\    \{tastetherainbow.reset}                  {tastetherainbow.fg.cyan}/\    \{tastetherainbow.reset}         
+        {tastetherainbow.fg.red}/::\    \{tastetherainbow.reset}                {tastetherainbow.fg.green}/::\    \{tastetherainbow.reset}                 {tastetherainbow.fg.yellow}/::\____\{tastetherainbow.reset}                {tastetherainbow.fg.blue}/::\____\{tastetherainbow.reset}                {tastetherainbow.fg.magenta}/::\    \{tastetherainbow.reset}                {tastetherainbow.fg.cyan}/::\    \{tastetherainbow.reset}        
+       {tastetherainbow.fg.red}/::::\    \{tastetherainbow.reset}              {tastetherainbow.fg.green}/::::\    \{tastetherainbow.reset}               {tastetherainbow.fg.yellow}/::::|   |{tastetherainbow.reset}               {tastetherainbow.fg.blue}/:::/    /{tastetherainbow.reset}                {tastetherainbow.fg.magenta}\:::\    \{tastetherainbow.reset}              {tastetherainbow.fg.cyan}/::::\    \{tastetherainbow.reset}       
+      {tastetherainbow.fg.red}/::::::\    \{tastetherainbow.reset}            {tastetherainbow.fg.green}/::::::\    \{tastetherainbow.reset}             {tastetherainbow.fg.yellow}/:::::|   |{tastetherainbow.reset}              {tastetherainbow.fg.blue}/:::/    /{tastetherainbow.reset}                  {tastetherainbow.fg.magenta}\:::\    \{tastetherainbow.reset}            {tastetherainbow.fg.cyan}/::::::\    \{tastetherainbow.reset}      
+     {tastetherainbow.fg.red}/:::/\:::\    \{tastetherainbow.reset}          {tastetherainbow.fg.green}/:::/\:::\    \{tastetherainbow.reset}           {tastetherainbow.fg.yellow}/::::::|   |{tastetherainbow.reset}             {tastetherainbow.fg.blue}/:::/    /{tastetherainbow.reset}                    {tastetherainbow.fg.magenta}\:::\    \{tastetherainbow.reset}          {tastetherainbow.fg.cyan}/:::/\:::\    \{tastetherainbow.reset}     
+    {tastetherainbow.fg.red}/:::/  \:::\    \{tastetherainbow.reset}        {tastetherainbow.fg.green}/:::/__\:::\    \{tastetherainbow.reset}         {tastetherainbow.fg.yellow}/:::/|::|   |{tastetherainbow.reset}            {tastetherainbow.fg.blue}/:::/____/{tastetherainbow.reset}                      {tastetherainbow.fg.magenta}\:::\    \{tastetherainbow.reset}        {tastetherainbow.fg.cyan}/:::/__\:::\    \{tastetherainbow.reset}    
+   {tastetherainbow.fg.red}/:::/    \:::\    \{tastetherainbow.reset}      {tastetherainbow.fg.green}/::::\   \:::\    \{tastetherainbow.reset}       {tastetherainbow.fg.yellow}/:::/ |::|   |{tastetherainbow.reset}            {tastetherainbow.fg.blue}|::|    |{tastetherainbow.reset}                       {tastetherainbow.fg.magenta}/::::\    \{tastetherainbow.reset}      {tastetherainbow.fg.cyan}/::::\   \:::\    \{tastetherainbow.reset}   
+  {tastetherainbow.fg.red}/:::/    / \:::\    \{tastetherainbow.reset}    {tastetherainbow.fg.green}/::::::\   \:::\    \{tastetherainbow.reset}     {tastetherainbow.fg.yellow}/:::/  |::|___|______{tastetherainbow.reset}      {tastetherainbow.fg.blue}|::|    |     _____{tastetherainbow.reset}    {tastetherainbow.fg.magenta}____    /::::::\    \{tastetherainbow.reset}    {tastetherainbow.fg.cyan}/::::::\   \:::\    \{tastetherainbow.reset}  
+ {tastetherainbow.fg.red}/:::/    /   \:::\ ___\{tastetherainbow.reset}  {tastetherainbow.fg.green}/:::/\:::\   \:::\    \{tastetherainbow.reset}   {tastetherainbow.fg.yellow}/:::/   |::::::::\    \{tastetherainbow.reset}     {tastetherainbow.fg.blue}|::|    |    /\    \{tastetherainbow.reset}  {tastetherainbow.fg.magenta}/\   \  /:::/\:::\    \{tastetherainbow.reset}  {tastetherainbow.fg.cyan}/:::/\:::\   \:::\    \{tastetherainbow.reset} 
+{tastetherainbow.fg.red}/:::/____/  ___\:::|    |{tastetherainbow.reset}{tastetherainbow.fg.green}/:::/  \:::\   \:::\____\{tastetherainbow.reset} {tastetherainbow.fg.yellow}/:::/    |:::::::::\____\{tastetherainbow.reset}    {tastetherainbow.fg.blue}|::|    |   /::\____\{tastetherainbow.reset}{tastetherainbow.fg.magenta}/::\   \/:::/  \:::\____\{tastetherainbow.reset}{tastetherainbow.fg.cyan}/:::/  \:::\   \:::\____\\{tastetherainbow.reset}
+{tastetherainbow.fg.red}\:::\    \ /\  /:::|____|{tastetherainbow.reset}{tastetherainbow.fg.green}\::/    \:::\  /:::/    /{tastetherainbow.reset} {tastetherainbow.fg.yellow}\::/    / ~~~~~/:::/    /{tastetherainbow.reset}    {tastetherainbow.fg.blue}|::|    |  /:::/    /{tastetherainbow.reset}{tastetherainbow.fg.magenta}\:::\  /:::/    \::/    /{tastetherainbow.reset}{tastetherainbow.fg.cyan}\::/    \:::\  /:::/    /{tastetherainbow.reset}
+ {tastetherainbow.fg.red}\:::\    /::\ \::/    /{tastetherainbow.reset}  {tastetherainbow.fg.green}\/____/ \:::\/:::/    /{tastetherainbow.reset}   {tastetherainbow.fg.yellow}\/____/      /:::/    /{tastetherainbow.reset}     {tastetherainbow.fg.blue}|::|    | /:::/    /{tastetherainbow.reset}  {tastetherainbow.fg.magenta}\:::\/:::/    / \/____/{tastetherainbow.reset}  {tastetherainbow.fg.cyan}\/____/ \:::\/:::/    /{tastetherainbow.reset} 
+  {tastetherainbow.fg.red}\:::\   \:::\ \/____/{tastetherainbow.reset}            {tastetherainbow.fg.green}\::::::/    /{tastetherainbow.reset}                {tastetherainbow.fg.yellow}/:::/    /{tastetherainbow.reset}      {tastetherainbow.fg.blue}|::|____|/:::/    /{tastetherainbow.reset}    {tastetherainbow.fg.magenta}\::::::/    /{tastetherainbow.reset}                    {tastetherainbow.fg.cyan}\::::::/    /{tastetherainbow.reset}  
+   {tastetherainbow.fg.red}\:::\   \:::\____\{tastetherainbow.reset}               {tastetherainbow.fg.green}\::::/    /{tastetherainbow.reset}                {tastetherainbow.fg.yellow}/:::/    /{tastetherainbow.reset}       {tastetherainbow.fg.blue}|:::::::::::/    /{tastetherainbow.reset}      {tastetherainbow.fg.magenta}\::::/____/{tastetherainbow.reset}                      {tastetherainbow.fg.cyan}\::::/    /{tastetherainbow.reset}   
+    {tastetherainbow.fg.red}\:::\  /:::/    /{tastetherainbow.reset}               {tastetherainbow.fg.green}/:::/    /{tastetherainbow.reset}                {tastetherainbow.fg.yellow}/:::/    /{tastetherainbow.reset}        {tastetherainbow.fg.blue}\::::::::::/____/{tastetherainbow.reset}        {tastetherainbow.fg.magenta}\:::\    \{tastetherainbow.reset}                      {tastetherainbow.fg.cyan}/:::/    /{tastetherainbow.reset}    
+     {tastetherainbow.fg.red}\:::\/:::/    /{tastetherainbow.reset}               {tastetherainbow.fg.green}/:::/    /{tastetherainbow.reset}                {tastetherainbow.fg.yellow}/:::/    /{tastetherainbow.reset}          {tastetherainbow.fg.blue}~~~~~~~~~~{tastetherainbow.reset}               {tastetherainbow.fg.magenta}\:::\    \{tastetherainbow.reset}                    {tastetherainbow.fg.cyan}/:::/    /{tastetherainbow.reset}     
+      {tastetherainbow.fg.red}\::::::/    /{tastetherainbow.reset}               {tastetherainbow.fg.green}/:::/    /{tastetherainbow.reset}                {tastetherainbow.fg.yellow}/:::/    /{tastetherainbow.reset}                                     {tastetherainbow.fg.magenta}\:::\    \{tastetherainbow.reset}                  {tastetherainbow.fg.cyan}/:::/    /{tastetherainbow.reset}      
+       {tastetherainbow.fg.red}\::::/    /{tastetherainbow.reset}               {tastetherainbow.fg.green}/:::/    /{tastetherainbow.reset}                {tastetherainbow.fg.yellow}/:::/    /{tastetherainbow.reset}                                       {tastetherainbow.fg.magenta}\:::\____\{tastetherainbow.reset}                {tastetherainbow.fg.cyan}/:::/    /{tastetherainbow.reset}       
+        {tastetherainbow.fg.red}\::/____/{tastetherainbow.reset}                {tastetherainbow.fg.green}\::/    /{tastetherainbow.reset}                 {tastetherainbow.fg.yellow}\::/    /{tastetherainbow.reset}                                         {tastetherainbow.fg.magenta}\::/    /{tastetherainbow.reset}                {tastetherainbow.fg.cyan}\::/    /{tastetherainbow.reset}        
+                                  {tastetherainbow.fg.green}\/____/{tastetherainbow.reset}                   {tastetherainbow.fg.yellow}\/____/{tastetherainbow.reset}                                           {tastetherainbow.fg.magenta}\/____/{tastetherainbow.reset}                  {tastetherainbow.fg.cyan}\/____/{tastetherainbow.reset}         
                                                                                                                                                       
 ''')
+
 startgame()
