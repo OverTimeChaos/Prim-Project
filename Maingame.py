@@ -56,7 +56,7 @@ def getclueAnswer(first=False, Clue_choose=""):
                 clue = getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Value in range "+tastetherainbow.reset))
             if clue in clue_chosen:
                 print(tastetherainbow.fg.red+"Clue already chosen"+tastetherainbow.reset)
-                clue = getclueAnswer(first, input(tastetherainbow.fg.red+"Insert Another Number or Y to take a guess "+tastetherainbow.reset))
+                clue = getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Another Number or Y to take a guess "+tastetherainbow.reset))
             else:
                 player_points = player_points-1 
                 checkGameOver()
