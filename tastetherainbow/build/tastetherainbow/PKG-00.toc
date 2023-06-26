@@ -1,0 +1,53 @@
+('C:\\Users\\James\\Desktop\\New '
+ 'Quantine\\Wrok\\Software\\Snek\\Project.0\\Prim-Project\\build\\tastetherainbow\\tastetherainbow.pkg',
+ {'BINARY': True,
+  'DATA': True,
+  'EXECUTABLE': True,
+  'EXTENSION': True,
+  'PYMODULE': True,
+  'PYSOURCE': True,
+  'PYZ': False,
+  'SPLASH': True},
+ [('PYZ-00.pyz',
+   'C:\\Users\\James\\Desktop\\New '
+   'Quantine\\Wrok\\Software\\Snek\\Project.0\\Prim-Project\\build\\tastetherainbow\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'C:\\Users\\James\\Desktop\\New '
+   'Quantine\\Wrok\\Software\\Snek\\Project.0\\Prim-Project\\build\\tastetherainbow\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'C:\\Users\\James\\Desktop\\New '
+   'Quantine\\Wrok\\Software\\Snek\\Project.0\\Prim-Project\\build\\tastetherainbow\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'C:\\Users\\James\\Desktop\\New '
+   'Quantine\\Wrok\\Software\\Snek\\Project.0\\Prim-Project\\build\\tastetherainbow\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'C:\\Users\\James\\Desktop\\New '
+   'Quantine\\Wrok\\Software\\Snek\\Project.0\\Prim-Project\\build\\tastetherainbow\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'C:\\Users\\James\\Desktop\\New '
+   'Quantine\\Wrok\\Software\\Snek\\Project.0\\Prim-Project\\build\\tastetherainbow\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'C:\\Program '
+   'Files\\Python311\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'C:\\Program '
+   'Files\\Python311\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('tastetherainbow',
+   'C:\\Users\\James\\Desktop\\New '
+   'Quantine\\Wrok\\Software\\Snek\\Project.0\\Prim-Project\\tastetherainbow.py',
+   'PYSOURCE')],
+ True,
+ False,
+ False,
+ [],
+ None,
+ None,
+ None)
