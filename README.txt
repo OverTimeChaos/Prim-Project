@@ -1,4 +1,7 @@
-Prim-Project
+Prim-Project:Gamivia 
+Repository for all Gamivia resources
+If you want the full experience please download and run on VS code
+
           _____                    _____                    _____                    _____                    _____                    _____          
          /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \         
         /::\    \                /::\    \                /::\____\                /::\____\                /::\    \                /::\    \        
@@ -20,7 +23,9 @@ Prim-Project
        \::::/    /               /:::/    /               /:::/    /                                       \:::\____\                /:::/    /       
         \::/____/                \::/    /                \::/    /                                         \::/    /                \::/    /        
                                   \/____/                  \/____/                                           \/____/                  \/____/         
-Repository for all 20 question resources
 
-Wonder is the world of Gamivia
+
+
+
+
 
