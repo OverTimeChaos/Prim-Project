@@ -122,7 +122,7 @@ def game_quiz():
                 for clue in clue_chosen:
                     print(f"{tastetherainbow.fg.magenta} - {clue}{tastetherainbow.reset}")
                 print (f'{tastetherainbow.fg.cyan}You have {player_points} point(s) left{tastetherainbow.reset}')
-                Clue_choose = input(tastetherainbow.fg.yellow+"Would you like to guess with 'y' or get another clue? "+tastetherainbow.reset)
+                Clue_choose = input(tastetherainbow.fg.yellow+"Would you like to guess with 'y' or enter a number to get another clue? "+tastetherainbow.reset)
                 getclueAnswer(Clue_choose=Clue_choose)
 #Gets called when the program starts. Sets early parameters 
 def startgame():
