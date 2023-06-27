@@ -53,17 +53,17 @@ def getclueAnswer(first=False, Clue_choose=""):
                 clue = question[topic_area][Clue_choose-1]
             except IndexError:
                 print(tastetherainbow.fg.red+"Value out of range"+tastetherainbow.reset)
-                clue = getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Value in range "+tastetherainbow.reset))
+                return getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Value in range "+tastetherainbow.reset))
             if clue in clue_chosen:
                 print(tastetherainbow.fg.red+"Clue already chosen"+tastetherainbow.reset)
-                clue = getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Another Number or Y to take a guess "+tastetherainbow.reset))
+                return getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Another Number or Y to take a guess "+tastetherainbow.reset))
             else:
                 player_points = player_points-1 
                 checkGameOver()
                 clue_chosen.append(clue)
         except ValueError:
             print(tastetherainbow.fg.red+"Invalid value!"+tastetherainbow.reset)
-            clue = getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Valid Value "+tastetherainbow.reset))
+            return getclueAnswer(first, input(tastetherainbow.fg.magenta+"Insert Valid Value "+tastetherainbow.reset))
         return clue
 # check if player has run out of
 def checkGameOver():
